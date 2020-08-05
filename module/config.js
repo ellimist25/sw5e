@@ -1,4 +1,4 @@
-// Namespace D&D5e Configuration Values
+// Namespace Configuration Values
 export const SW5E = {};
 
 // ASCII Artwork
@@ -46,7 +46,7 @@ SW5E.alignments = {
 
 SW5E.weaponProficiencies = {
   "sim": "SW5E.WeaponSimpleProficiency",
-  "bla": "SW5E.WeaponBlasterProficiency"
+  "mar": "SW5E.WeaponMartialProficiency"
 };
 
 SW5E.toolProficiencies = {
@@ -86,7 +86,7 @@ SW5E.toolProficiencies = {
 /* -------------------------------------------- */
 
 /**
- * This Object defines the various lengths of time which can occur in D&D5e
+ * This Object defines the various lengths of time which can occur
  * @type {Object}
  */
 SW5E.timePeriods = {
@@ -119,8 +119,20 @@ SW5E.abilityActivationTypes = {
   "day": SW5E.timePeriods.day,
   "special": SW5E.timePeriods.spec,
   "legendary": "SW5E.LegAct",
-  "lair": "SW5E.LairAct"
+  "lair": "SW5E.LairAct",
+  "crew": "SW5E.VehicleCrewAction"
 };
+
+/* -------------------------------------------- */
+
+
+SW5E.abilityConsumptionTypes = {
+  "ammo": "SW5E.ConsumeAmmunition",
+  "attribute": "SW5E.ConsumeAttribute",
+  "material": "SW5E.ConsumeMaterial",
+  "charges": "SW5E.ConsumeCharges"
+};
+
 
 /* -------------------------------------------- */
 
@@ -196,7 +208,8 @@ SW5E.equipmentTypes = {
   "natural": "SW5E.EquipmentNatural",
   "shield": "SW5E.EquipmentShield",
   "clothing": "SW5E.EquipmentClothing",
-  "trinket": "SW5E.EquipmentTrinket"
+  "trinket": "SW5E.EquipmentTrinket",
+  "vehicle": "SW5E.EquipmentVehicle"
 };
 
 
@@ -220,17 +233,16 @@ SW5E.armorProficiencies = {
  * Enumerate the valid consumable types which are recognized by the system
  * @type {Object}
  */
-SW5E.consumableTypes = {
-  "adrenal": "SW5E.ConsumableAdrenal",
-  "poison": "SW5E.ConsumablePoison",
-  "explosive": "SW5E.ConsumableExplosive",
-  "food": "SW5E.ConsumableFood",
-  "medpac": "SW5E.ConsumableMedpac",
-  "technology": "SW5E.ConsumableTechnology",
-  "ammunition": "SW5E.ConsumableAmmunition",
-  "trinket": "SW5E.ConsumableTrinket"
-};
-
+ SW5E.consumableTypes = {
+   "adrenal": "SW5E.ConsumableAdrenal",
+   "poison": "SW5E.ConsumablePoison",
+   "explosive": "SW5E.ConsumableExplosive",
+   "food": "SW5E.ConsumableFood",
+   "medpac": "SW5E.ConsumableMedpac",
+   "technology": "SW5E.ConsumableTechnology",
+   "ammunition": "SW5E.ConsumableAmmunition",
+   "trinket": "SW5E.ConsumableTrinket"
+ };
 
 /* -------------------------------------------- */
 
@@ -241,7 +253,6 @@ SW5E.consumableTypes = {
 SW5E.currencies = {
   "CR": "SW5E.CurrencyCR",
   };
-
 /* -------------------------------------------- */
 
 
@@ -315,18 +326,18 @@ SW5E.distanceUnits = {
  */
 SW5E.encumbrance = {
   currencyPerWeight: 50,
-  strMultiplier: 15
+  strMultiplier: 15,
+  vehicleWeightMultiplier: 2000 // 2000 lbs in a ton
 };
 
 /* -------------------------------------------- */
 
 /**
- * This Object defines the types of single or area targets which can be applied in D&D5e
+ * This Object defines the types of single or area targets which can be applied
  * @type {Object}
  */
 SW5E.targetTypes = {
   "none": "SW5E.None",
-  "self": "SW5E.TargetSelf",
   "creature": "SW5E.TargetCreature",
   "droid": "SW5E.TargetDroid",
   "ally": "SW5E.TargetAlly",
@@ -338,6 +349,7 @@ SW5E.targetTypes = {
   "cylinder": "SW5E.TargetCylinder",
   "cone": "SW5E.TargetCone",
   "square": "SW5E.TargetSquare",
+  "self": "SW5E.TargetSelf",
   "cube": "SW5E.TargetCube",
   "line": "SW5E.TargetLine",
   "wall": "SW5E.TargetWall",
@@ -377,7 +389,7 @@ SW5E.healingTypes = {
 
 
 /**
- * Enumerate the denominations of hit dice which can apply to classes in the D&D5E system
+ * Enumerate the denominations of hit dice which can apply to classes
  * @type {Array.<string>}
  */
 SW5E.hitDieTypes = ["d6", "d8", "d10", "d12"];
@@ -400,7 +412,7 @@ SW5E.senses = {
 /* -------------------------------------------- */
 
 /**
- * The set of skill which can be trained in D&D5e
+ * The set of skill which can be trained
  * @type {Object}
  */
 SW5E.skills = {
@@ -434,7 +446,7 @@ SW5E.powerPreparationModes = {
   "prepared": "SW5E.PowerPrepPrepared"
 };
 
-SW5E.powerUpcastModes = ["always"];
+SW5E.powerUpcastModes = ["always", "pact", "prepared"];
 
 
 SW5E.powerProgression = {
@@ -457,7 +469,11 @@ SW5E.powerScalingModes = {
 
 /* -------------------------------------------- */
 
-// Weapon Types
+
+/**
+ * Define the set of types which a weapon item can take
+ * @type {Object}
+ */
 SW5E.weaponTypes = {
   "simpleVW": "SW5E.WeaponSimpleVW",
   "simpleB": "SW5E.WeaponSimpleB",
@@ -467,7 +483,8 @@ SW5E.weaponTypes = {
   "martialLW": "SW5E.WeaponMartialLW",
   "natural": "SW5E.WeaponNatural",
   "improv": "SW5E.WeaponImprov",
-  "ammo": "SW5E.WeaponAmmo"
+  "ammo": "SW5E.WeaponAmmo",
+  "siege": "SW5E.WeaponSiege"
 };
 
 
@@ -526,7 +543,6 @@ SW5E.powerSchools = {
   "enh": "SW5E.SchoolEnh"
 };
 
-
 // Power Levels
 SW5E.powerLevels = {
   0: "SW5E.PowerLevel0",
@@ -539,6 +555,20 @@ SW5E.powerLevels = {
   7: "SW5E.PowerLevel7",
   8: "SW5E.PowerLevel8",
   9: "SW5E.PowerLevel9"
+};
+
+// Power Scroll Compendium UUIDs
+SW5E.powerScrollIds = {
+  0: 'Compendium.sw5e.items.rQ6sO7HDWzqMhSI3',
+  1: 'Compendium.sw5e.items.9GSfMg0VOA2b4uFN',
+  2: 'Compendium.sw5e.items.XdDp6CKh9qEvPTuS',
+  3: 'Compendium.sw5e.items.hqVKZie7x9w3Kqds',
+  4: 'Compendium.sw5e.items.DM7hzgL836ZyUFB1',
+  5: 'Compendium.sw5e.items.wa1VF8TXHmkrrR35',
+  6: 'Compendium.sw5e.items.tI3rWx4bxefNCexS',
+  7: 'Compendium.sw5e.items.mtyw4NS1s7j2EJaD',
+  8: 'Compendium.sw5e.items.aOrinPg7yuDZEuWr',
+  9: 'Compendium.sw5e.items.O4YbkJkLlnsgUszZ'
 };
 
 /**
@@ -600,6 +630,20 @@ SW5E.proficiencyLevels = {
   0.5: "SW5E.HalfProficient",
   2: "SW5E.Expertise"
 };
+
+/* -------------------------------------------- */
+
+/**
+ * The amount of cover provided by an object.
+ * In cases where multiple pieces of cover are
+ * in play, we take the highest value.
+ */
+SW5E.cover = {
+  0: 'SW5E.None',
+  .5: 'SW5E.CoverHalf',
+  .75: 'SW5E.CoverThreeQuarters',
+  1: 'SW5E.CoverTotal'
+}
 
 /* -------------------------------------------- */
 
@@ -672,97 +716,78 @@ SW5E.CR_EXP_LEVELS = [
 
 // Configure Optional Character Flags
 SW5E.characterFlags = {
-  "detailOriented": {
-    name: "Detail Oriented",
-    hint: "You have advantage on Intelligence (Investigation) checks within 5 feet.",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "keenSenses": {
-    name: "Keen Hearing and Smell",
-    hint: "You have advantage on Wisdom (Perception) checks that involve hearing or smell.",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "naturallyStealthy": {
-    name: "Naturally Stealthy",
-    hint: "You can attempt to hide even when you are obscured only by a creature that is your size or larger than you.",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "nimbleEscape": {
-    name: "Nimble Escape",
-    hint: "You can take the Disengage or Hide action as a bonus action.",
-    section: "Racial Traits",
-    type: Boolean
-  },
   "powerfulBuild": {
-    name: "Powerful Build",
-    hint: "You count as one size larger when determining your carrying capacity and the weight you can push, drag, or lift.",
+    name: "SW5E.FlagsPowerfulBuild",
+    hint: "SW5E.FlagsPowerfulBuildHint",
     section: "Racial Traits",
     type: Boolean
   },
-  "programmer": {
-    name: "Programmer",
-    hint: "Whenever you make an Intelligence (Technology) check related to computers, you are considered to have expertise in the Technology skill.",
+  "savageAttacks": {
+    name: "SW5E.FlagsSavageAttacks",
+    hint: "SW5E.FlagsSavageAttacksHint",
     section: "Racial Traits",
     type: Boolean
   },
-  "techResistance": {
-    name: "Tech Resistance",
-    hint: "You have advantage on Dexterity and Intelligence saving throws against tech powers.",
+  "elvenAccuracy": {
+    name: "SW5E.FlagsElvenAccuracy",
+    hint: "SW5E.FlagsElvenAccuracyHint",
     section: "Racial Traits",
     type: Boolean
   },
-  "unarmedCombatant": {
-    name: "Unarmed Combatant",
-    hint: "Your unarmed strikes deal 1d4 kinetic damage. You can use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
-    section: "Racial Traits",
-    type: Boolean
-  },
-  "undersized": {
-    name: "Undersized",
-    hint: "You can’t use heavy shields, martial weapons with the two-handed property unless it also has the light property, and if a martial weapon has the versatile property, you can only wield it in two hands.",
+  "halflingLucky": {
+    name: "SW5E.FlagsHalflingLucky",
+    hint: "SW5E.FlagsHalflingLuckyHint",
     section: "Racial Traits",
     type: Boolean
   },
   "initiativeAdv": {
-    name: "Advantage on Initiative",
-    hint: "Provided by feats or magical items.",
+    name: "SW5E.FlagsInitiativeAdv",
+    hint: "SW5E.FlagsInitiativeAdvHint",
     section: "Feats",
     type: Boolean
   },
   "initiativeAlert": {
-    name: "Alert Feat",
-    hint: "Provides +5 to Initiative.",
+    name: "SW5E.FlagsAlert",
+    hint: "SW5E.FlagsAlertHint",
     section: "Feats",
     type: Boolean
   },
   "jackOfAllTrades": {
-    name: "Jack of All Trades",
-    hint: "Half-Proficiency to Ability Checks in which you are not already Proficient.",
+    name: "SW5E.FlagsJOAT",
+    hint: "SW5E.FlagsJOATHint",
     section: "Feats",
     type: Boolean
   },
   "observantFeat": {
-    name: "Observant Feat",
-    hint: "Provides a +5 to passive Perception and Investigation.",
+    name: "SW5E.FlagsObservant",
+    hint: "SW5E.FlagsObservantHint",
     skills: ['prc','inv'],
     section: "Feats",
     type: Boolean
   },
+  "reliableTalent": {
+    name: "SW5E.FlagsReliableTalent",
+    hint: "SW5E.FlagsReliableTalentHint",
+    section: "Feats",
+    type: Boolean
+  },
   "remarkableAthlete": {
-    name: "Remarkable Athlete.",
-    hint: "Half-Proficiency (rounded-up) to physical Ability Checks and Initiative.",
+    name: "SW5E.FlagsRemarkableAthlete",
+    hint: "SW5E.FlagsRemarkableAthleteHint",
     abilities: ['str','dex','con'],
     section: "Feats",
     type: Boolean
   },
   "weaponCriticalThreshold": {
-    name: "Critical Hit Threshold",
-    hint: "Allow for expanded critical range; for example Improved or Superior Critical",
+    name: "SW5E.FlagsCritThreshold",
+    hint: "SW5E.FlagsCritThresholdHint",
     section: "Feats",
     type: Number,
     placeholder: 20
   }
 };
+
+// Configure allowed status flags
+SW5E.allowedActorFlags = [
+  "isPolymorphed", "originalActor"
+].concat(Object.keys(SW5E.characterFlags));
