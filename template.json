@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["character", "npc"],
+    "types": ["character", "npc", "vehicle"],
     "templates": {
       "common": {
         "abilities": {
@@ -31,7 +31,7 @@
         },
         "attributes": {
           "ac": {
-            "min": 0
+            "value": 10
           },
           "hp": {
             "value": 10,
@@ -44,6 +44,8 @@
             "value": 0,
             "bonus": 0
           },
+
+
           "speed": {
             "value": "30 ft",
             "special": ""
@@ -240,7 +242,7 @@
       }
     },
     "character": {
-      "templates": ["common"],
+      "templates": ["common", "creature"],
       "attributes": {
         "death": {
           "success": 0,
@@ -297,7 +299,7 @@
       }
     },
     "npc": {
-      "templates": ["common"],
+      "templates": ["common", "creature"],
       "details": {
         "type": "",
         "environment": "",
@@ -321,6 +323,75 @@
           "value": 0,
           "initiative": 0
         }
+      }
+    },
+    "vehicle": {
+      "templates": [
+        "common"
+      ],
+      "abilities": {
+        "int": {
+          "value": 0
+        },
+        "wis": {
+          "value": 0
+        },
+        "cha": {
+          "value": 0
+        }
+      },
+      "attributes": {
+        "ac": {
+          "value": null,
+          "motionless": ""
+        },
+        "actions": {
+          "stations": false,
+          "value": 0,
+          "thresholds": {
+            "2": null,
+            "1": null,
+            "0": null
+          }
+        },
+        "hp": {
+          "value": null,
+          "max": null,
+          "dt": null,
+          "mt": null
+        },
+        "capacity": {
+          "creature": "",
+          "cargo": 0
+        },
+        "speed": ""
+      },
+      "traits": {
+        "size": "lg",
+        "dimensions": "",
+        "di": {
+          "value": [
+            "poison",
+            "psychic"
+          ]
+        },
+        "ci": {
+          "value": [
+            "blinded",
+            "charmed",
+            "deafened",
+            "frightened",
+            "paralyzed",
+            "petrified",
+            "poisoned",
+            "stunned",
+            "unconscious"
+          ]
+        }
+      },
+      "cargo": {
+        "crew": [],
+        "passengers": []
       }
     }
   },
@@ -368,6 +439,11 @@
           "value": 0,
           "max": 0,
           "per": null
+        },
+        "consume": {
+          "type": "",
+          "target": null,
+          "amount": null
         }
       },
       "action": {
@@ -386,8 +462,19 @@
           "dc": null,
           "scaling": "power"
         }
-      }
-    },
+      },
+      "mountable": {
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+          }
+        }
+      },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
@@ -429,6 +516,10 @@
         "type": "light",
         "value": 10,
         "dex": null
+      },
+      "speed": {
+        "value": null,
+        "conditions": ""
       },
       "strength": 0,
       "stealth": false,
@@ -474,12 +565,12 @@
         "prepared": false
       },
       "scaling": {
-        "mode": null,
+        "mode": "none",
         "formula": null
       }
     },
     "weapon": {
-      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem" ,"activatedEffect", "action", "mountable"],
       "weaponType": "simpleM",
       "properties": {},
       "proficient": true
