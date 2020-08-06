@@ -1,11 +1,10 @@
 /**
- * The DnD5e game system for Foundry Virtual Tabletop
- * A system for playing the fifth edition of the worlds most popular roleplaying game.
- * Author: Atropos
+ * The Star Wars 5th Edition game system for Foundry Virtual Tabletop
+ * Author: The Dev Team
  * Software License: GNU GPLv3
- * Content License: https://media.wizards.com/2016/downloads/SW/SRD-OGL_V5.1.pdf
- * Repository: https://gitlab.com/foundrynet/sw5e
- * Issue Tracker: https://gitlab.com/foundrynet/sw5e/issues
+ * Content License: https://media.wizards.com/2016/downloads/SW5ERD-OGL_V5.1.pdf
+ * Repository: https://github.com/unrealkakeman89/sw5e
+ * Issue Tracker: https://github.com/unrealkakeman89/sw5e/issues
  */
 
 // Import Modules
