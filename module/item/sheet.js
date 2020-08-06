@@ -49,6 +49,7 @@ export default class ItemSheet5e extends ItemSheet {
     data.hasAttackRoll = this.item.hasAttack;
     data.isHealing = data.item.data.actionType === "heal";
     data.isFlatDC = getProperty(data.item.data, "save.scaling") === "flat";
+    data.isWeapon = data.item.type === "weapon";
 
     // Vehicles
     data.isCrewed = data.item.data.activation?.type === 'crew';
@@ -169,6 +170,10 @@ export default class ItemSheet5e extends ItemSheet {
       props.push(labels.featType);
     }
 
+    else if ( item.type === "species" ) {
+
+        }
+
     // Action type
     if ( item.data.actionType ) {
       props.push(CONFIG.SW5E.itemActionTypes[item.data.actionType]);
@@ -224,6 +229,24 @@ export default class ItemSheet5e extends ItemSheet {
       return arr;
     }, []);
 
+    // Handle armorproperties Array
+        let armorproperties = Object.entries(formData).filter(e => e[0].startsWith("data.armorproperties.parts"));
+        formData["data.armorproperties.parts"] = armorproperties.reduce((arr, entry) => {
+          let [i, j] = entry[0].split(".").slice(3);
+          if ( !arr[i] ) arr[i] = [];
+          arr[i][j] = entry[1];
+          return arr;
+        }, []);
+
+    	// Handle weaponproperties Array
+    	let weaponproperties = Object.entries(formData).filter(e => e[0].startsWith("data.weaponproperties.parts"));
+        formData["data.weaponproperties.parts"] = weaponproperties.reduce((arr, entry) => {
+          let [i, j] = entry[0].split(".").slice(3);
+          if ( !arr[i] ) arr[i] = [];
+          arr[i][j] = entry[1];
+          return arr;
+        }, []);
+
     // Update the Item
     super._updateObject(event, formData);
   }
@@ -237,6 +260,13 @@ export default class ItemSheet5e extends ItemSheet {
 
     // Activate any Trait Selectors
     html.find('.trait-selector.class-skills').click(this._onConfigureClassSkills.bind(this));
+
+    // Armor properties
+    	html.find(".armorproperties-control").click(this._onarmorpropertiesControl.bind(this));
+
+    	// Weapon properties
+    	html.find(".weaponproperties-control").click(this._onweaponpropertiesControl.bind(this));
+
   }
 
   /* -------------------------------------------- */
@@ -267,6 +297,64 @@ export default class ItemSheet5e extends ItemSheet {
       return this.item.update({"data.damage.parts": damage.parts});
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+     * Add or remove a armorproperties part from the armorproperties formula
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onarmorpropertiesControl(event) {
+      event.preventDefault();
+      const a = event.currentTarget;
+
+      // Add new armorproperties component
+      if ( a.classList.contains("add-armorproperties") ) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const armorproperties = this.item.data.data.armorproperties;
+        return this.item.update({"data.armorproperties.parts": armorproperties.parts.concat([["", ""]])});
+      }
+
+      // Remove a armorproperties component
+      if ( a.classList.contains("delete-armorproperties") ) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const li = a.closest(".armorproperties-part");
+        const armorproperties = duplicate(this.item.data.data.armorproperties);
+        armorproperties.parts.splice(Number(li.dataset.armorpropertiesPart), 1);
+        return this.item.update({"data.armorproperties.parts": armorproperties.parts});
+      }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Add or remove a weaponproperties part from the weaponproperties formula
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onweaponpropertiesControl(event) {
+      event.preventDefault();
+      const a = event.currentTarget;
+
+      // Add new weaponproperties component
+      if ( a.classList.contains("add-weaponproperties") ) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const weaponproperties = this.item.data.data.weaponproperties;
+        return this.item.update({"data.weaponproperties.parts": weaponproperties.parts.concat([["", ""]])});
+      }
+
+      // Remove a weaponproperties component
+      if ( a.classList.contains("delete-weaponproperties") ) {
+        await this._onSubmit(event);  // Submit any unsaved changes
+        const li = a.closest(".weaponproperties-part");
+        const weaponproperties = duplicate(this.item.data.data.weaponproperties);
+        weaponproperties.parts.splice(Number(li.dataset.weaponpropertiesPart), 1);
+        return this.item.update({"data.weaponproperties.parts": weaponproperties.parts});
+      }
+    }
 
   /* -------------------------------------------- */
 
