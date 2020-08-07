@@ -43,21 +43,47 @@
           "init": {
             "value": 0,
             "bonus": 0
-          },
-
-
-          "speed": {
-            "value": "30 ft",
-            "special": ""
-          },
-          "powercasting": "int"
+          }
         },
         "details": {
-          "alignment": "",
           "biography": {
             "value": "",
             "public": ""
+          }
+        },
+        "traits": {
+          "size": "med",
+          "di": {
+            "value": [],
+            "custom": ""
           },
+          "dr": {
+            "value": [],
+            "custom": ""
+          },
+          "dv": {
+            "value": [],
+            "custom": ""
+          },
+          "ci": {
+            "value": [],
+            "custom": ""
+          }
+        },
+        "currency": {
+          "gc": 0
+        }
+      },
+      "creature": {
+        "attributes": {
+          "powercasting": "int",
+          "speed": {
+            "value": "30 ft",
+            "special": ""
+          }
+        },
+        "details": {
+          "alignment": "",
           "race": ""
         },
         "skills": {
@@ -135,31 +161,11 @@
           }
         },
         "traits": {
-          "size": "med",
           "senses": "",
           "languages": {
             "value": [],
             "custom": ""
-          },
-          "di": {
-            "value": [],
-            "custom": ""
-          },
-          "dr": {
-            "value": [],
-            "custom": ""
-          },
-          "dv": {
-            "value": [],
-            "custom": ""
-          },
-          "ci": {
-            "value": [],
-            "custom": ""
           }
-        },
-        "currency": {
-          "gc": 0
         },
         "powers": {
           "power1": {
@@ -326,9 +332,7 @@
       }
     },
     "vehicle": {
-      "templates": [
-        "common"
-      ],
+      "templates": ["common"],
       "abilities": {
         "int": {
           "value": 0
@@ -370,23 +374,11 @@
         "size": "lg",
         "dimensions": "",
         "di": {
-          "value": [
-            "poison",
-            "psychic"
-          ]
+          "value": ["poison", "psychic"]
         },
         "ci": {
-          "value": [
-            "blinded",
-            "charmed",
-            "deafened",
-            "frightened",
-            "paralyzed",
-            "petrified",
-            "poisoned",
-            "stunned",
-            "unconscious"
-          ]
+          "value": ["blinded", "charmed", "deafened", "frightened", "paralyzed", "petrified", "poisoned", "stunned",
+            "unconscious"]
         }
       },
       "cargo": {
@@ -472,9 +464,9 @@
           "max": 0,
           "dt": null,
           "conditions": ""
-          }
         }
-      },
+      }
+    },
     "backpack": {
       "templates": ["itemDescription", "physicalItem"],
       "capacity": {
@@ -503,15 +495,11 @@
       "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
       "consumableType": "potion",
       "uses": {
-        "value": 0,
-        "max": 0,
-        "per": null,
-        "autoUse": true,
-        "autoDestroy": true
+        "autoDestroy": false
       }
     },
     "equipment": {
-      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action"],
+      "templates": ["itemDescription", "physicalItem", "activatedEffect", "action", "mountable"],
       "armor": {
         "type": "light",
         "value": 10,
